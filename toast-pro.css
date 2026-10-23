@@ -1,0 +1,119 @@
+/* ==========================================================================
+   PRIME STORM - Unified Premium Toasts (upgrades all App.showToast notes)
+   Applied by js/toast-pro.js which adds .ps-pro + close button.
+   ========================================================================== */
+#toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  pointer-events: none;
+  max-width: min(370px, calc(100vw - 48px));
+}
+#toastContainer .toast.ps-pro {
+  position: relative;
+  background: linear-gradient(180deg, rgba(10, 20, 14, 0.96), rgba(5, 11, 8, 0.98));
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  border-radius: 16px;
+  padding: 0.85rem 2.4rem 0.85rem 0.9rem;
+  color: #eef4ef;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 255, 136, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  pointer-events: auto;
+  overflow: hidden;
+  animation: ps-toast-in 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#toastContainer .toast.ps-pro::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 999px;
+  background: #00ff88;
+  box-shadow: 0 0 12px #00ff88;
+}
+#toastContainer .toast.ps-pro.toast-error::before,
+#toastContainer .toast.ps-pro.error::before { background: #ff5d5d; box-shadow: 0 0 12px #ff5d5d; }
+#toastContainer .toast.ps-pro.toast-info::before,
+#toastContainer .toast.ps-pro.info::before { background: #00e1ff; box-shadow: 0 0 12px #00e1ff; }
+@keyframes ps-toast-in {
+  from { transform: translateX(110%); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+#toastContainer .toast.ps-pro.ps-out { opacity: 0; transform: translateX(30%); }
+.ps-t-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.45);
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.3);
+  margin-top: 1px;
+}
+.ps-t-icon i { font-size: 0.85rem; color: #00ff88; }
+#toastContainer .toast.ps-pro.error .ps-t-icon,
+#toastContainer .toast.ps-pro.toast-error .ps-t-icon {
+  background: rgba(255, 93, 93, 0.12);
+  border-color: rgba(255, 93, 93, 0.5);
+  box-shadow: 0 0 14px rgba(255, 93, 93, 0.3);
+}
+#toastContainer .toast.ps-pro.error .ps-t-icon i,
+#toastContainer .toast.ps-pro.toast-error .ps-t-icon i { color: #ff5d5d; }
+#toastContainer .toast.ps-pro.info .ps-t-icon,
+#toastContainer .toast.ps-pro.toast-info .ps-t-icon {
+  background: rgba(0, 225, 255, 0.12);
+  border-color: rgba(0, 225, 255, 0.5);
+  box-shadow: 0 0 14px rgba(0, 225, 255, 0.3);
+}
+#toastContainer .toast.ps-pro.info .ps-t-icon i,
+#toastContainer .toast.ps-pro.toast-info .ps-t-icon i { color: #00e1ff; }
+.ps-t-body { min-width: 0; font-weight: 500; }
+.ps-t-x {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.ps-t-x:hover { color: #fff; }
+#toastContainer .toast.ps-pro::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left;
+  background: linear-gradient(90deg, #00ff88, transparent);
+  animation: ps-t-bar 3.6s linear forwards;
+  opacity: 0.7;
+}
+#toastContainer .toast.ps-pro.error::after,
+#toastContainer .toast.ps-pro.toast-error::after { background: linear-gradient(90deg, #ff5d5d, transparent); }
+@keyframes ps-t-bar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  #toastContainer .toast.ps-pro { animation: none; }
+  #toastContainer .toast.ps-pro::after { display: none; }
+}

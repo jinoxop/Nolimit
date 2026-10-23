@@ -1,0 +1,251 @@
+/* ==========================================================================
+   PRIME STORM - Downloads PRO v2.0 (pure CSS overlay, no JS logic change)
+   Big-site look: spotlight, glass, motion, VIP banner, search bar.
+   Companion: js/downloads-fx.js (adds --mx/--my, .ps-in, .ps-vip, search)
+   ========================================================================== */
+
+/* ---------- entrance (JS reveal adds .ps-in; CSS fallback animates) ---------- */
+@keyframes ps-rise {
+  from { opacity: 0; transform: translateY(28px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#resourcesGridContainer .resource-card { animation: ps-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+#resourcesGridContainer .resource-card:nth-child(2) { animation-delay: 0.08s; }
+#resourcesGridContainer .resource-card:nth-child(3) { animation-delay: 0.16s; }
+#resourcesGridContainer .resource-card:nth-child(4) { animation-delay: 0.24s; }
+#resourcesGridContainer .resource-card:nth-child(5) { animation-delay: 0.32s; }
+#resourcesGridContainer .resource-card:nth-child(6) { animation-delay: 0.4s; }
+
+/* ---------- section card: spotlight glass ---------- */
+#resourcesGridContainer .resource-card {
+  --mx: 50%;
+  --my: 0%;
+  background:
+    radial-gradient(420px circle at var(--mx) var(--my), rgba(0, 255, 136, 0.13), transparent 65%),
+    radial-gradient(120% 60% at 50% -10%, rgba(0, 255, 136, 0.09), transparent 60%),
+    linear-gradient(180deg, rgba(10, 24, 17, 0.8) 0%, rgba(4, 10, 7, 0.94) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.22);
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+#resourcesGridContainer .resource-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.9), transparent);
+  box-shadow: 0 0 18px rgba(0, 255, 136, 0.7);
+  opacity: 0.85;
+  pointer-events: none;
+}
+#resourcesGridContainer .resource-card:hover {
+  border-color: rgba(0, 255, 136, 0.55);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(0, 255, 136, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- all cards: same animated gradient border (uniform) ---------- */
+@keyframes ps-beam { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+#resourcesGridContainer .resource-card {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(rgba(8, 20, 13, 0.94), rgba(5, 12, 8, 0.96)) padding-box,
+    linear-gradient(110deg, #00ff88, #38bdf8, #00ff88, #a7f3d0, #00ff88) border-box;
+  background-size: auto, 200% 100%;
+  animation: ps-beam 6s linear infinite, ps-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(0, 255, 136, 0.28);
+}
+#resourcesGridContainer .resource-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(0, 255, 136, 0.13), transparent 65%);
+  pointer-events: none;
+}
+
+/* ---------- header ---------- */
+@keyframes ps-ring {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.45), 0 0 20px rgba(0, 255, 136, 0.22); }
+  100% { box-shadow: 0 0 0 12px rgba(0, 255, 136, 0), 0 0 20px rgba(0, 255, 136, 0.22); }
+}
+#resourcesGridContainer .resource-icon-badge { animation: ps-ring 2.4s ease-out infinite; }
+#resourcesGridContainer .resource-card-title {
+  background: linear-gradient(180deg, #ffffff 30%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#resourcesGridContainer .resource-count-badge.badge-featured {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.22), rgba(56, 189, 248, 0.16));
+  letter-spacing: 1px;
+}
+
+/* ---------- file rows ---------- */
+#resourcesGridContainer .cyber-download-card { position: relative; overflow: hidden; }
+#resourcesGridContainer .cyber-download-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -70%;
+  width: 45%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+#resourcesGridContainer .cyber-download-card:hover::after { left: 130%; }
+#resourcesGridContainer .cyber-download-card:hover {
+  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(0, 255, 136, 0.05);
+  transform: translateX(4px);
+}
+#resourcesGridContainer .cyber-file-title { letter-spacing: -0.2px; }
+#resourcesGridContainer .cyber-meta-badge.status-clean {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  color: #00ff88;
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- download button ---------- */
+#resourcesGridContainer .btn-cyber-download {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.16), rgba(0, 255, 136, 0.06));
+  border: 1px solid rgba(0, 255, 136, 0.55);
+  box-shadow: 0 0 18px rgba(0, 255, 136, 0.25), inset 0 0 12px rgba(0, 255, 136, 0.08);
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  transition: all 0.25s ease;
+}
+#resourcesGridContainer .btn-cyber-download i { transition: transform 0.25s ease; }
+#resourcesGridContainer .btn-cyber-download:hover {
+  background: linear-gradient(135deg, #00ff88, #00cc6e);
+  color: #02120a;
+  box-shadow: 0 0 32px rgba(0, 255, 136, 0.55);
+  transform: translateY(-2px);
+}
+#resourcesGridContainer .btn-cyber-download:hover i { transform: translateY(2px); }
+#resourcesGridContainer .btn-cyber-download:active { transform: translateY(0) scale(0.97); }
+#resourcesGridContainer .btn-cyber-download.ps-busy {
+  pointer-events: none;
+  opacity: 0.75;
+}
+#resourcesGridContainer .btn-cyber-download.ps-busy::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 14px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  border-top-color: #00ff88;
+  animation: ps-spin 0.7s linear infinite;
+  vertical-align: -2px;
+}
+@keyframes ps-spin { to { transform: rotate(360deg); } }
+.ps-ripple {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  animation: ps-rip 0.65s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ps-rip {
+  from { opacity: 0.8; width: 12px; height: 12px; }
+  to { opacity: 0; width: 220px; height: 220px; }
+}
+
+/* ---------- VIP banner: premium identity card ---------- */
+@keyframes ps-glowbar {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(0, 255, 136, 0.18)); }
+  50% { filter: drop-shadow(0 0 26px rgba(0, 255, 136, 0.38)); }
+}
+#discordGateContainer.ps-vip {
+  animation: ps-glowbar 3s ease-in-out infinite;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(0, 255, 136, 0.7), rgba(56, 189, 248, 0.45), rgba(0, 255, 136, 0.7));
+  background-size: 200% 100%;
+  animation: ps-beam 7s linear infinite, ps-glowbar 3s ease-in-out infinite;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#discordGateContainer.ps-vip > div {
+  border-radius: 23px;
+  background:
+    radial-gradient(130% 120% at 15% 0%, rgba(0, 255, 136, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(9, 22, 15, 0.96), rgba(4, 10, 7, 0.98));
+  padding: 1.1rem 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: none;
+  box-shadow: none;
+}
+#discordGateContainer.ps-vip img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.18), 0 0 24px rgba(0, 255, 136, 0.45);
+}
+#discordGateContainer.ps-vip button {
+  border-radius: 999px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+#discordGateContainer.ps-vip button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.35);
+}
+
+/* ---------- offline rows ---------- */
+#resourcesGridContainer .cyber-download-card.ps-offline {
+  opacity: 0.55;
+  filter: grayscale(0.6);
+}
+#resourcesGridContainer .cyber-download-card.ps-offline:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+#resourcesGridContainer .cyber-download-card.ps-offline .btn-cyber-download {
+  border-color: rgba(148, 163, 184, 0.4);
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.08);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+#resourcesGridContainer .cyber-download-card.ps-offline .cyber-meta-badge {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: #94a3b8;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #resourcesGridContainer .resource-card,
+  #resourcesGridContainer .resource-card.cyber-card-featured,
+  #resourcesGridContainer .resource-icon-badge,
+  #discordGateContainer.ps-vip { animation: none !important; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 768px) {
+  #resourcesGridContainer .resource-card { border-radius: 20px; }
+  #resourcesGridContainer .btn-cyber-download { width: 100%; justify-content: center; }
+}

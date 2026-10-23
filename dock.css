@@ -1,0 +1,201 @@
+/* --------------------------------------------------------------------------
+   DOCK COMPONENT (React Bits Port for PRIME STORM)
+   Interactive Floating Cyber Dock with Proximity Magnification & Tooltip
+   -------------------------------------------------------------------------- */
+
+/* Ensure page content has clearance above floating dock */
+body {
+  padding-bottom: 4.5rem;
+}
+
+.dock-outer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 999;
+  padding-bottom: 1rem;
+}
+
+.dock-panel {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: fit-content;
+  gap: 0.75rem;
+  border-radius: 20px;
+  background: rgba(10, 16, 22, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 136, 0.22);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.65), 
+    0 0 25px rgba(0, 255, 136, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 0 0.75rem 0.6rem;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dock-panel:hover {
+  border-color: rgba(0, 255, 136, 0.45);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.75), 
+    0 0 35px rgba(0, 255, 136, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(16, 24, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  outline: none;
+  color: #94a3b8;
+  text-decoration: none;
+  user-select: none;
+  transform-origin: bottom center;
+  will-change: width, height, transform;
+  transition: 
+    color 0.2s ease, 
+    border-color 0.2s ease, 
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dock-item:hover,
+.dock-item:focus-visible {
+  color: #00ff88;
+  border-color: rgba(0, 255, 136, 0.55);
+  background: rgba(0, 255, 136, 0.12);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.5), 
+    0 0 18px rgba(0, 255, 136, 0.35);
+}
+
+.dock-item.active {
+  color: #00ff88;
+  border-color: rgba(0, 255, 136, 0.5);
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+}
+
+.dock-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 8px #00ff88;
+  pointer-events: none;
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.dock-icon i,
+.dock-icon svg {
+  font-size: 1.22rem;
+  transition: transform 0.2s ease;
+}
+
+.dock-item:hover .dock-icon i,
+.dock-item:hover .dock-icon svg {
+  transform: scale(1.12);
+}
+
+.dock-label {
+  position: absolute;
+  top: -2.3rem;
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  background: rgba(8, 14, 20, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.25rem 0.65rem;
+  font-size: 0.76rem;
+  font-family: var(--font-cyber, 'Orbitron', monospace, sans-serif);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  transform: translateX(-50%) translateY(0);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 255, 136, 0.25);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.dock-label.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+/* Tooltip Arrow */
+.dock-label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: rgba(8, 14, 20, 0.95) transparent transparent transparent;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .dock-outer {
+    padding-bottom: 0.65rem;
+  }
+
+  .dock-panel {
+    gap: 0.45rem;
+    padding: 0 0.5rem 0.45rem;
+    border-radius: 16px;
+  }
+
+  .dock-item {
+    border-radius: 10px;
+  }
+
+  .dock-icon i,
+  .dock-icon svg {
+    font-size: 1.05rem;
+  }
+
+  .dock-label {
+    display: none; /* Hide hover tooltips on touch devices */
+  }
+}
+
+/* Explicitly hide Discord VIP and Back-to-Top dock items */
+.dock-item[aria-label="Discord VIP"],
+.dock-item[aria-label="Back to Top"],
+.dock-item:has(.fa-discord),
+.dock-item:has(.fa-arrow-up) {
+  display: none !important;
+}

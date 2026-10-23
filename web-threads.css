@@ -1,0 +1,83 @@
+/* ==========================================================================
+   PRIME STORM — WebThreads Component Styles
+   Glowing woven thread strands background effect
+   ========================================================================== */
+
+.web-threads-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Hero WebThreads Background ── */
+.hero-webthreads {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ── Section Divider WebThreads ── */
+.section-webthreads-divider {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin: -1rem 0;
+  z-index: 1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Footer WebThreads ── */
+.footer-webthreads {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── Entrance Gate WebThreads Background ── */
+.entrance-webthreads {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ── Generic Section WebThreads Background ── */
+.section-webthreads {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Ensure all page-view sections have position relative for absolute children */
+.page-view {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure content sits above WebThreads */
+.page-view > .container,
+.page-view > section {
+  position: relative;
+  z-index: 1;
+}

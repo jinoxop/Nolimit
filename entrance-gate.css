@@ -1,0 +1,349 @@
+/* ==========================================================================
+   PRIME STORM - Pure Minimal Entrance & Cinematic Site Reveal
+   Using the Site's Native 3D Raymarched GradientWaves & Fire Embers
+   ========================================================================== */
+
+/* While gate is active, hide foreground website content and the dock completely */
+body.gate-active .navbar,
+body.gate-active main,
+body.gate-active .dock-outer,
+body.gate-active .dock-panel,
+body.gate-active [class*="dock"],
+body.gate-active .toast-container {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  display: none !important;
+}
+
+/* Remove fixed navbar spacer when gate is active */
+body.gate-active {
+  padding-top: 0 !important;
+}
+
+/* Full-Screen Entrance Overlay (Completely transparent so the exact site background is visible!) */
+.site-entrance-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: transparent; /* Exact site background shines through! */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1200px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Central Minimal Hero (Title + SlideCommit) */
+.minimal-entrance-hero {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2.25rem;
+  padding: 2rem;
+  transform: translateY(0) scale(1);
+  will-change: transform, opacity, filter;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Brand Title: PRIME STORM with TrueFocus Physics */
+.minimal-brand-title {
+  position: relative;
+  display: inline-flex;
+  gap: clamp(0.5rem, 1.8vw, 1.2rem);
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform, opacity, filter;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease,
+              filter 0.4s ease;
+}
+
+.entrance-brand-focus {
+  --border-color: #00ff88;
+  --glow-color: rgba(0, 255, 136, 0.85);
+}
+
+.entrance-brand-focus .focus-word {
+  position: relative;
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: clamp(3rem, 8vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  padding: 4px 14px;
+  filter: blur(3.5px);
+  opacity: 0.55;
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* First word: PRIME - Solid Green */
+.entrance-brand-focus .focus-word.brand-accent,
+.entrance-brand-focus .focus-word:first-child.brand-accent {
+  color: #00ff88;
+  -webkit-text-fill-color: #00ff88;
+  text-shadow: 0 0 24px rgba(0, 255, 136, 0.5);
+  filter: blur(3.5px);
+}
+
+/* Second word: STORM - Crisp solid white */
+.entrance-brand-focus .focus-word:last-child:not(.brand-accent) {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.3), 0 4px 25px rgba(0, 0, 0, 0.85);
+}
+
+/* Active focused state */
+.entrance-brand-focus .focus-word.active {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+  transform: scale(1.02);
+}
+
+.entrance-brand-focus .focus-word.brand-accent.active,
+.entrance-brand-focus .focus-word:first-child.brand-accent.active {
+  filter: drop-shadow(0 0 35px rgba(0, 255, 136, 0.75)) blur(0px) !important;
+}
+
+.entrance-brand-focus .focus-word:last-child:not(.brand-accent).active {
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.65), 0 0 55px rgba(0, 255, 136, 0.4), 0 4px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Scaled Cyber Corner Brackets for large entrance title */
+.entrance-brand-focus .focus-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: none;
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.3s ease;
+  will-change: transform, width, height;
+}
+
+.entrance-brand-focus .corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--border-color, #00ff88);
+  filter: drop-shadow(0 0 10px var(--glow-color, rgba(0, 255, 136, 0.95)))
+          drop-shadow(0 0 20px rgba(0, 255, 136, 0.5));
+  border-radius: 3px;
+}
+
+.entrance-brand-focus .top-left {
+  top: -6px;
+  left: -6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.entrance-brand-focus .top-right {
+  top: -6px;
+  right: -6px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.entrance-brand-focus .bottom-left {
+  bottom: -6px;
+  left: -6px;
+  border-right: none;
+  border-top: none;
+}
+
+.entrance-brand-focus .bottom-right {
+  bottom: -6px;
+  right: -6px;
+  border-left: none;
+  border-top: none;
+}
+
+@media (max-width: 600px) {
+  .entrance-brand-focus .focus-word {
+    font-size: clamp(2.2rem, 9vw, 3.4rem);
+    padding: 3px 8px;
+  }
+  .entrance-brand-focus .corner {
+    width: 10px;
+    height: 10px;
+    border-width: 2px;
+  }
+  .entrance-brand-focus .top-left { top: -4px; left: -4px; }
+  .entrance-brand-focus .top-right { top: -4px; right: -4px; }
+  .entrance-brand-focus .bottom-left { bottom: -4px; left: -4px; }
+  .entrance-brand-focus .bottom-right { bottom: -4px; right: -4px; }
+}
+
+/* SlideCommit Slot */
+.entrance-slider-slot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+/* Styling for SlideCommit on top of Live 3D Background */
+.site-entrance-overlay .slide-commit {
+  box-shadow: 
+    0 0 0 1px rgba(0, 255, 136, 0.35),
+    0 12px 40px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(0, 255, 136, 0.25);
+  border-radius: 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+}
+
+.site-entrance-overlay .slide-commit:hover {
+  box-shadow: 
+    0 0 0 1.5px rgba(0, 255, 136, 0.7),
+    0 16px 48px rgba(0, 0, 0, 0.9),
+    0 0 55px rgba(0, 255, 136, 0.5);
+  transform: translateY(-1px);
+}
+
+.site-entrance-overlay .slide-commit__track {
+  background: rgba(6, 14, 10, 0.85);
+  border: 1px solid rgba(0, 255, 136, 0.28);
+}
+
+.site-entrance-overlay .slide-commit__text--plain {
+  font-family: var(--font-cyber, 'Rajdhani', sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0, 255, 136, 0.9);
+  text-shadow: 0 0 14px rgba(0, 255, 136, 0.5);
+}
+
+.site-entrance-overlay .slide-commit__capsule {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.55);
+}
+
+/* ==========================================================================
+   CINEMATIC REVEAL - LIGHTWEIGHT VERSION (Smooth, Low FPS Impact)
+   ========================================================================== */
+
+/* ==========================================================================
+   ENTRANCE UNLOCK — Simple & Clean (JS-driven zoom + fade)
+   ========================================================================== */
+
+/* Hide old effects — animation now handled in entrance-gate.js */
+.entrance-screen-flash,
+.entrance-laser-beam,
+.entrance-shockwave {
+  display: none !important;
+}
+
+/* Site entrance fade-in */
+body.site-entering .navbar,
+body.site-entering main,
+body.site-entering .dock-container {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+body.site-entering .navbar {
+  animation: fadeInDown 0.4s ease-out forwards;
+}
+
+body.site-entering #home .hero-container {
+  animation: fadeInUp 0.5s ease-out forwards 0.1s;
+}
+
+body.site-entering .dock-outer {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  animation: fadeInUp 0.4s ease-out forwards 0.15s;
+}
+
+body.site-entering .dock-panel {
+  pointer-events: auto !important;
+}
+
+body.site-entering #gradientWavesBg {
+  animation: fadeSimple 0.6s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeSimple {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Replay Button in Nav */
+.btn-replay-entrance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: #00ff88;
+  font-family: var(--font-cyber, 'Rajdhani', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(12px);
+}
+
+.btn-replay-entrance:hover {
+  background: rgba(0, 255, 136, 0.18);
+  border-color: #00ff88;
+  box-shadow: 0 0 18px rgba(0, 255, 136, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-replay-entrance i {
+  transition: transform 0.4s ease;
+}
+
+.btn-replay-entrance:hover i {
+  transform: rotate(180deg);
+}

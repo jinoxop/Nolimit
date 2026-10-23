@@ -1,0 +1,123 @@
+/* ==========================================================================
+   PRIME STORM — Smooth Page Transitions (fade + rise + blur)
+   Works with the existing .page-view router, adds exit/enter animation
+   ========================================================================== */
+
+/* ── Base: keep hidden pages out of layout ── */
+.page-view {
+  display: none;
+}
+
+/* ── Entering page ── */
+.page-view.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Entrance animation (fade + rise + de-blur) */
+.page-view.entering {
+  animation: pageEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Exit animation — stays in layout while fading out */
+.page-view.leaving {
+  display: block;
+  animation: pageLeave 0.22s ease-in both;
+  pointer-events: none;
+}
+
+@keyframes pageLeave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: blur(4px);
+  }
+}
+
+/* ── Staggered children: content rises one after another ── */
+.page-view.entering > .container > *,
+.page-view.entering > .section-webthreads + .container > * {
+  animation: pageChildRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.page-view.entering > .container > *:nth-child(1) { animation-delay: 0.05s; }
+.page-view.entering > .container > *:nth-child(2) { animation-delay: 0.12s; }
+.page-view.entering > .container > *:nth-child(3) { animation-delay: 0.19s; }
+.page-view.entering > .container > *:nth-child(4) { animation-delay: 0.26s; }
+.page-view.entering > .container > *:nth-child(5) { animation-delay: 0.33s; }
+.page-view.entering > .container > *:nth-child(n+6) { animation-delay: 0.38s; }
+
+@keyframes pageChildRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Top progress bar shown during switch ── */
+.page-transition-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 1000;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+body.page-switching .page-transition-bar {
+  opacity: 1;
+  animation: pageBarSweep 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageBarSweep {
+  0%   { transform: scaleX(0); transform-origin: left center; }
+  55%  { transform: scaleX(1); transform-origin: left center; }
+  56%  { transform-origin: right center; }
+  100% { transform: scaleX(0); transform-origin: right center; }
+}
+
+/* ── Lock double clicks mid-transition (visual only) ── */
+body.page-switching main {
+  pointer-events: none;
+}
+
+/* ── Reduced motion: instant switch, no animation ── */
+@media (prefers-reduced-motion: reduce) {
+  .page-view.entering,
+  .page-view.leaving,
+  .page-view.entering > .container > * {
+    animation: none !important;
+  }
+  body.page-switching .page-transition-bar {
+    display: none;
+  }
+}

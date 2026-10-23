@@ -1,0 +1,1859 @@
+/* ==========================================================================
+   PRIME STORM - Downloads & Tools (Descargas y Herramientas) Premium UI
+   ========================================================================== */
+
+.downloads-section {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  overflow: visible;
+}
+
+.recursos-tag {
+  color: #00ff88;
+  font-family: var(--font-cyber);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  padding: 0.38rem 1.15rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.18);
+}
+
+.recursos-title {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.recursos-title .highlight-green {
+  background: linear-gradient(135deg, #10b981 0%, #00ff88 50%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(0, 255, 136, 0.45));
+}
+
+.recursos-subtitle {
+  font-size: 0.98rem;
+  color: #94a3b8;
+  max-width: 550px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   Cards Grid (3-Column Cyber Layout / Responsive 1-Col on Mobile)
+   -------------------------------------------------------------------------- */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.65rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .resources-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base Cyber Resource Card */
+.resource-card {
+  background: linear-gradient(180deg, rgba(10, 22, 16, 0.72) 0%, rgba(5, 12, 8, 0.88) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.16);
+  border-radius: 22px;
+  padding: 1.65rem;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cyber HUD Corner Brackets - Completely Removed as requested */
+.cyber-card-corner {
+  display: none !important;
+}
+
+/* Featured VIP Card (Crown Jewel) */
+.resource-card.cyber-card-featured {
+  border-color: rgba(0, 255, 136, 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(0, 255, 136, 0.18);
+  background: linear-gradient(180deg, rgba(12, 30, 20, 0.85) 0%, rgba(6, 16, 10, 0.95) 100%);
+}
+
+.resource-card.cyber-card-featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ff88, #38bdf8, transparent);
+  box-shadow: 0 0 15px #00ff88;
+}
+
+.resource-card:hover {
+  border-color: rgba(0, 255, 136, 0.5);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 255, 136, 0.22);
+  transform: translateY(-6px);
+}
+
+/* Card Header */
+.resource-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.resource-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.resource-icon-badge {
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 255, 136, 0.09);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff88;
+  font-size: 1.35rem;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.22);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.resource-icon-badge.gold-aura {
+  border-color: #00ff88;
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+}
+
+.resource-header-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.resource-card:hover .resource-icon-badge {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.resource-title-wrap {
+  min-width: 0;
+}
+
+.resource-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.resource-card-subtitle {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 3px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resource-count-badge {
+  font-family: var(--font-cyber);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.28rem 0.65rem;
+  border-radius: 8px;
+  letter-spacing: 0.6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.resource-count-badge.badge-featured {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.38);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+/* Download Item Links List */
+.resource-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex-grow: 1;
+}
+
+/* Cyber Download Card Container */
+.cyber-download-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-download-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #00ff88;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cyber-download-card:hover {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: rgba(0, 255, 136, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 136, 0.1);
+}
+
+.cyber-download-card:hover::before {
+  opacity: 1;
+}
+
+.cyber-card-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.cyber-file-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 255, 136, 0.07);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff88;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.cyber-download-card:hover .cyber-file-icon-wrap {
+  background: rgba(0, 255, 136, 0.15);
+  border-color: #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  transform: scale(1.05);
+}
+
+.cyber-file-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.cyber-file-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.cyber-file-title {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.cyber-pill-tag {
+  font-family: var(--font-cyber);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.28);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.cyber-file-desc {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 3px 0 5px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cyber-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.cyber-meta-badge {
+  font-size: 0.68rem;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-cyber);
+}
+
+.cyber-meta-badge i {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.cyber-meta-badge.status-clean {
+  color: #00ff88;
+}
+
+.cyber-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #00ff88;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #00ff88;
+  animation: radarPulse 1.8s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   THE SICK CYBER DOWNLOAD BUTTON
+   -------------------------------------------------------------------------- */
+.cyber-card-right {
+  flex-shrink: 0;
+}
+
+.btn-cyber-download {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #00ff88 !important;
+  background: rgba(0, 255, 136, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 255, 136, 0.45);
+  cursor: pointer;
+  box-shadow:
+    0 0 15px rgba(0, 255, 136, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+}
+
+.btn-cyber-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.dl-anim-icon {
+  font-size: 0.95rem;
+  transition: transform 0.25s ease;
+}
+
+.btn-cyber-download:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: rgba(0, 255, 136, 0.2);
+  border-color: rgba(0, 255, 136, 0.85);
+  box-shadow:
+    0 0 25px rgba(0, 255, 136, 0.45),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+}
+
+.btn-cyber-download:hover .dl-anim-icon {
+  transform: translateY(2px);
+}
+
+.btn-cyber-download:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Light Sweep Shimmer across button */
+.btn-cyber-shimmer {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.btn-cyber-download:hover .btn-cyber-shimmer {
+  left: 140%;
+}
+
+/* Responsive rules already defined above at 1024px and 768px */
+
+/* --------------------------------------------------------------------------
+   CYBER DISCORD CONNECT GATE (Compact, Sleek & Frameless)
+   -------------------------------------------------------------------------- */
+.cyber-discord-gate {
+  max-width: 480px;
+  margin: 1.5rem auto 3rem;
+  background: rgba(11, 18, 24, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2.2rem 2rem 1.8rem;
+  text-align: center;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(88, 101, 242, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInGate 0.4s ease forwards;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 280px;
+  --glow-color: 0, 255, 136;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* MagicBento Dynamic Border Glow (Soft Neon Accent) */
+.cyber-discord-gate.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  background: radial-gradient(
+    var(--glow-radius, 280px) circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(var(--glow-color, 0, 255, 136), calc(var(--glow-intensity, 0) * 0.85)) 0%,
+    rgba(var(--glow-color, 0, 255, 136), calc(var(--glow-intensity, 0) * 0.3)) 40%,
+    transparent 70%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.cyber-discord-gate.magic-bento-card--border-glow:hover {
+  border-color: rgba(var(--glow-color, 0, 255, 136), 0.4);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), 0 0 40px rgba(var(--glow-color, 0, 255, 136), 0.22);
+}
+
+.cyber-discord-gate > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* Icon Badge with Discord Glow and Lock Bubble */
+.gate-icon-badge {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gate-discord-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #5865F2 0%, #3e48b5 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.85rem;
+  box-shadow: 0 10px 25px rgba(88, 101, 242, 0.45), 0 0 20px rgba(0, 255, 136, 0.2);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-discord-gate:hover .gate-discord-icon {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.gate-lock-dot {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00ff88;
+  border: 2px solid #0b1218;
+  color: #041009;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+}
+
+/* Compact Typography */
+.gate-heading {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+}
+
+.gate-subtext {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-bottom: 1.35rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gate-role-pill {
+  display: inline-flex;
+  align-items: center;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.btn-discord-connect {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 1.6rem;
+  border-radius: 9999px;
+  background: rgba(88, 101, 242, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(88, 101, 242, 0.55);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow:
+    0 0 15px rgba(88, 101, 242, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  text-decoration: none;
+  margin-bottom: 1.15rem;
+}
+
+.btn-discord-connect i.fa-discord {
+  font-size: 1.3rem;
+  color: #5865F2;
+  transition: transform 0.25s ease;
+}
+
+.btn-discord-connect i.fa-arrow-right {
+  font-size: 0.85rem;
+  color: #5865F2;
+  transition: transform 0.25s ease;
+}
+
+.btn-discord-connect:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(88, 101, 242, 0.25);
+  border-color: #5865F2;
+  box-shadow:
+    0 0 25px rgba(88, 101, 242, 0.5),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.btn-discord-connect:hover i.fa-discord {
+  transform: scale(1.15) rotate(6deg);
+}
+
+.btn-discord-connect:hover i.fa-arrow-right {
+  transform: translateX(4px);
+}
+
+.btn-discord-connect:active {
+  transform: translateY(0);
+}
+
+/* Secondary Actions Footer */
+.gate-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.gate-join-link {
+  color: #00ff88;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.gate-join-link:hover {
+  color: #55ffaa;
+  text-decoration: underline;
+}
+
+/* Micro Trust Tag */
+.gate-trust-tag {
+  font-size: 0.74rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gate-trust-tag i {
+  color: #00ff88;
+  font-size: 0.8rem;
+}
+
+.sec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+
+.sec-pill i {
+  font-size: 0.88rem;
+}
+
+/* 2-Step Interactive Grid */
+.gate-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-bottom: 2.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-step-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gate-step-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.gate-step-card.active {
+  background: radial-gradient(circle at 50% 0%, rgba(88, 101, 242, 0.15) 0%, rgba(13, 20, 36, 0.85) 100%);
+  border: 1px solid rgba(88, 101, 242, 0.5);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(88, 101, 242, 0.2);
+}
+
+.gate-step-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.gate-step-tag {
+  font-family: var(--font-cyber);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.22rem 0.65rem;
+  border-radius: 6px;
+  letter-spacing: 0.8px;
+}
+
+.gate-step-tag.active {
+  color: #5865F2;
+  background: rgba(88, 101, 242, 0.15);
+  border-color: rgba(88, 101, 242, 0.4);
+  box-shadow: 0 0 10px rgba(88, 101, 242, 0.2);
+}
+
+.gate-step-status {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gate-step-status.active {
+  color: #00ff88;
+}
+
+.gate-step-icon-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.gate-step-icon-wrap.active {
+  background: linear-gradient(135deg, rgba(88, 101, 242, 0.3) 0%, rgba(13, 20, 36, 0.9) 100%);
+  border-color: rgba(88, 101, 242, 0.7);
+  color: #5865F2;
+  box-shadow: 0 0 25px rgba(88, 101, 242, 0.4);
+}
+
+.gate-step-name {
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.gate-step-info {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.gate-steps-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 136, 0.6);
+  font-size: 1.4rem;
+}
+
+/* Step Action Buttons */
+.btn-step-action {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-step-action.secondary {
+  background: rgba(0, 255, 136, 0.06);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  color: #00ff88;
+}
+
+.btn-step-action.secondary:hover {
+  background: rgba(0, 255, 136, 0.16);
+  border-color: #00ff88;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.25);
+}
+
+.btn-step-action.primary {
+  background: linear-gradient(135deg, #5865F2 0%, #4752C4 50%, #353ca0 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5), 0 0 20px rgba(88, 101, 242, 0.3);
+}
+
+.btn-step-action.primary:hover {
+  background: linear-gradient(135deg, #6775f5 0%, #5865F2 50%, #4752C4 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(88, 101, 242, 0.7), 0 0 30px rgba(88, 101, 242, 0.45);
+}
+
+.btn-discord-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  animation: buttonShimmer 3.5s infinite;
+}
+
+@keyframes buttonShimmer {
+  0% { left: -100%; }
+  35% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* Footer Guarantees */
+.gate-footer-guarantees {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.gate-guarantee-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.38rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .gate-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .gate-steps-divider {
+    transform: rotate(90deg);
+    padding: 0.5rem 0;
+  }
+}
+
+.btn-gate-server:hover {
+  background: rgba(0, 255, 136, 0.15);
+  border-color: #00ff88;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+}
+
+.btn-gate-refresh {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: #00ff88;
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn-gate-refresh:hover {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+}
+
+.btn-gate-text {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.btn-gate-text:hover {
+  color: #ffffff;
+}
+
+/* Denied State Profile Preview */
+.gate-denied-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  max-width: 380px;
+  margin: 0 auto 1.5rem;
+}
+
+.badge-missing-role {
+  display: block;
+  font-family: var(--font-cyber);
+  font-size: 0.72rem;
+  color: #ef4444;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-top: 2px;
+}
+
+/* User Verified Member Top Bar */
+.discord-user-bar {
+  max-width: 1280px;
+  margin: 0 auto 2rem;
+  background: rgba(0, 255, 136, 0.06);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 136, 0.15);
+  animation: fadeInGate 0.3s ease forwards;
+}
+
+.user-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.discord-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35);
+  object-fit: cover;
+}
+
+.discord-user-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.discord-user-sub {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 2px;
+}
+
+.text-green {
+  color: #00ff88;
+}
+
+.gate-badge-client {
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid #00ff88;
+  color: #00ff88;
+  font-family: var(--font-cyber);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+}
+
+.gate-badge-owner {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid #fbbf24;
+  color: #fbbf24;
+  font-family: var(--font-cyber);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.btn-gate-logout {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.btn-gate-logout:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+.gate-spinner {
+  width: 42px;
+  height: 42px;
+  border: 3px solid rgba(88, 101, 242, 0.2);
+  border-top-color: #5865F2;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Downloads & Discord Gate Mobile Responsiveness
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .discord-gate-card {
+    padding: 2.2rem 1.4rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
+
+  .gate-icon-circle {
+    width: 64px;
+    height: 64px;
+    font-size: 1.8rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .gate-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  .gate-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-gate-connect {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 0.92rem;
+  }
+
+  .discord-gate-user-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.15rem 1.2rem;
+    text-align: center;
+  }
+
+  .user-bar-left {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .discord-user-name {
+    justify-content: center;
+  }
+
+  .discord-user-sub {
+    justify-content: center;
+  }
+
+  .btn-gate-logout {
+    width: 100%;
+    justify-content: center;
+    min-height: 42px;
+  }
+
+  .resource-card {
+    border-radius: 18px;
+  }
+
+  .resource-card-header {
+    padding: 1rem 1.15rem;
+  }
+
+  .resource-card-title {
+    font-size: 1.05rem;
+  }
+
+  .resource-items-list {
+    padding: 0.85rem;
+    gap: 0.65rem;
+  }
+
+  .resource-item-btn {
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+  }
+
+  .resource-item-name {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .discord-gate-card {
+    padding: 1.75rem 1rem;
+    border-radius: 16px;
+  }
+
+  .gate-title {
+    font-size: 1.35rem;
+  }
+
+  .gate-badge-client,
+  .gate-badge-owner {
+    font-size: 0.65rem;
+  }
+}
+
+/* ==========================================================================
+   PRIME STORM - Tutorial Video Modal & Guide Popup (GIF-Style Looping Video)
+   ========================================================================== */
+.tutorial-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: -1.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.btn-watch-guide {
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  color: #00ff88;
+  font-family: var(--font-cyber);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.55rem 1.4rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-watch-guide:hover {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Futuristic Video Guide Trigger & Modal Styles
+   -------------------------------------------------------------------------- */
+.btn-video-guide-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.15) 0%, rgba(10, 20, 16, 0.85) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.38);
+  border-radius: 9999px;
+  padding: 0.75rem 1.6rem;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 255, 136, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-video-guide-trigger:hover {
+  background: radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.25) 0%, rgba(12, 28, 20, 0.95) 100%);
+  border-color: #00ff88;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 255, 136, 0.4);
+}
+
+.btn-guide-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+  animation: radarPulse 1.8s infinite;
+}
+
+.btn-guide-icon {
+  font-size: 0.85rem;
+  color: #00ff88;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.8));
+}
+
+.btn-guide-badge {
+  font-family: var(--font-cyber);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #040806;
+  background: #00ff88;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+/* Modal Overlay */
+.tutorial-modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  background: rgba(3, 7, 5, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+}
+
+.tutorial-modal-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.tutorial-modal-container {
+  width: 100%;
+  max-width: 940px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: radial-gradient(ellipse at 50% -10%, rgba(0, 255, 136, 0.15) 0%, rgba(7, 13, 10, 0.98) 70%);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  border-top: 2px solid rgba(0, 255, 136, 0.85);
+  border-radius: 28px;
+  padding: 1.8rem;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 255, 136, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  transform: scale(0.88) translateY(35px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tutorial-modal-overlay.active .tutorial-modal-container {
+  transform: scale(1) translateY(0) !important;
+}
+
+.modal-ambient-glow {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 150px;
+  background: radial-gradient(ellipse, rgba(0, 255, 136, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* Modal Header */
+.tutorial-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tutorial-modal-title-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.tutorial-live-dot {
+  width: 10px;
+  height: 10px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00ff88;
+  animation: pulseLiveDot 1.8s infinite;
+}
+
+@keyframes pulseLiveDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.6; }
+}
+
+.tutorial-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.tutorial-modal-title span {
+  color: #00ff88;
+}
+
+.modal-title-tag {
+  font-family: var(--font-cyber);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.tutorial-close-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.tutorial-close-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: scale(1.03);
+}
+
+/* Video Wrapper & Futuristic HUD Corners */
+.tutorial-video-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.95), 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 136, 0.15);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+/* Video Wrapper & Futuristic HUD Corners - Corners Disabled */
+.video-hud-corner {
+  display: none !important;
+}
+
+.tutorial-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 18px;
+}
+
+/* Quick Steps Beneath Video */
+.tutorial-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.4rem;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.tutorial-step-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.tutorial-step-box:hover {
+  background: rgba(0, 255, 136, 0.06);
+  border-color: rgba(0, 255, 136, 0.35);
+  transform: translateY(-2px);
+}
+
+.tutorial-step-num {
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff88;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
+  flex-shrink: 0;
+}
+
+.tutorial-step-text {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  line-height: 1.35;
+}
+
+.tutorial-step-text strong {
+  color: #ffffff;
+  display: block;
+  font-size: 0.86rem;
+  margin-bottom: 0.15rem;
+}
+
+/* Modal Bottom Actions */
+.tutorial-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tutorial-footer-hint {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.modal-cta-btn {
+  max-width: 280px;
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.35) !important;
+}
+
+@media (max-width: 768px) {
+  .tutorial-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .tutorial-modal-container {
+    padding: 1.2rem;
+  }
+  .tutorial-modal-footer {
+    flex-direction: column;
+    gap: 0.85rem;
+    text-align: center;
+  }
+  .modal-cta-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SHOP PLANS GRID — Force 3 equal columns always (overrides resources-grid)
+   -------------------------------------------------------------------------- */
+.shop-plans-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  align-items: stretch !important;
+}
+
+@media (max-width: 1100px) {
+  .shop-plans-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1.1rem !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .shop-plans-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-plans-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.85rem !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .shop-plans-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================================
+   CLOUDFLARE TURNSTILE CYBER SHIELD CARD
+   ========================================================================== */
+.turnstile-cyber-card {
+  max-width: 440px;
+  margin: 1.25rem auto 2.25rem;
+  background: rgba(11, 18, 24, 0.82);
+  border: 1px solid rgba(0, 255, 136, 0.22);
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem 1.15rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 255, 136, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.turnstile-cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff88, #00e1ff, transparent);
+}
+
+.turnstile-cyber-card.verified {
+  border-color: rgba(0, 255, 136, 0.55);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 255, 136, 0.22);
+}
+
+.turnstile-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.turnstile-shield-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff88;
+  font-size: 1.1rem;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+}
+
+.turnstile-card-info {
+  text-align: left;
+}
+
+.turnstile-card-title {
+  font-family: var(--font-cyber, 'Orbitron', monospace);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+}
+
+.turnstile-card-sub {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.turnstile-widget-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 65px;
+}
+
+.turnstile-status-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-cyber, monospace);
+  color: #94a3b8;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.turnstile-cyber-card.verified .turnstile-status-box {
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+/* ==========================================================================
+   UNIFIED TRANSFORMATION STAGE & SPECTACULAR 3D ANIMATIONS
+   ========================================================================== */
+.downloads-gate-stage {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 1.5rem auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.downloads-gate-stage .turnstile-cyber-card {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.downloads-gate-stage .cyber-discord-gate {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Spectacular 3D Cyber Vanish Animation for Turnstile Card */
+@keyframes cyberCardVanish {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateX(0deg);
+    filter: blur(0px) brightness(1);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.04) translateY(-4px) rotateX(3deg);
+    filter: brightness(1.5) drop-shadow(0 0 25px rgba(0, 255, 136, 0.85));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.72) translateY(-42px) rotateX(16deg);
+    filter: blur(16px) brightness(2.4);
+    pointer-events: none;
+  }
+}
+
+.turnstile-cyber-card.card-vanish,
+.turnstile-cyber-card.card-cyber-vanish {
+  animation: cyberCardVanish 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  transform-origin: center center;
+  pointer-events: none !important;
+}
+
+/* Spectacular 3D Cyber Erupt Animation for Discord VIP Card */
+@keyframes cyberDiscordErupt {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(45px) rotateX(-16deg);
+    filter: blur(14px) brightness(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.025) translateY(-5px) rotateX(2deg);
+    filter: blur(0px) brightness(1.3) drop-shadow(0 0 40px rgba(88, 101, 242, 0.65));
+  }
+  85% {
+    transform: scale(0.99) translateY(1px) rotateX(-0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotateX(0deg);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+.turnstile-gate-revealed,
+.discord-gate-cyber-erupt {
+  animation: cyberDiscordErupt 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  transform-origin: center top;
+}
+
+.turnstile-fade-out {
+  opacity: 0 !important;
+  transform: translateY(-20px) scale(0.95) !important;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+}
+
+/* Turnstile retry button + dead-widget box (recovery UX, failure-only) */
+.turnstile-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.5);
+  color: #00ff88;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.turnstile-retry-btn:hover {
+  background: #00ff88;
+  color: #02120a;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+#turnstileSecurityCard .turnstile-widget-slot.ps-widget-dead .cf-turnstile,
+#turnstileSecurityCard .turnstile-widget-slot.ps-widget-dead iframe {
+  display: none !important;
+}
+
+#turnstileSecurityCard .turnstile-widget-slot.ps-widget-dead {
+  min-height: 0;
+  border-style: dashed;
+}
